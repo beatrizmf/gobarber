@@ -1,8 +1,8 @@
 import path from 'path';
 import { injectable, inject } from 'tsyringe';
 
-import IUsersRepository from '@modules/users/infra/repositories/IUsersRepository';
-import IUserTokensRepository from '../infra/repositories/IUserTokensRepository';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IUserTokensRepository from '../repositories/IUserTokensRepository';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 
 import AppError from '@shared/errors/AppError';

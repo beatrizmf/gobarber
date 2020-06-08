@@ -2,8 +2,8 @@ import { addHours } from 'date-fns';
 
 import AppError from '@shared/errors/AppError';
 
-import FakeUserTokensRepository from '@modules/users/infra/repositories/fakes/FakeUserTokensRepository';
-import FakeUsersRepository from '@modules/users/infra/repositories/fakes/FakeUsersRepository';
+import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository';
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 
 import ResetPasswordService from './ResetPasswordService';

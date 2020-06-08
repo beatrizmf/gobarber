@@ -2,7 +2,7 @@ import { uuid } from 'uuidv4';
 import { isEqual } from 'date-fns';
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
-import IAppointmentRepository from '@modules/appointments/infra/repositories/IAppointmentRepository';
+import IAppointmentRepository from '@modules/appointments/repositories/IAppointmentRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 
 class FakeAppointmentRepository implements IAppointmentRepository {
