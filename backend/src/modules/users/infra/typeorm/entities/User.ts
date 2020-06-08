@@ -8,7 +8,7 @@ import {
 
 import { Exclude, Expose } from 'class-transformer';
 
-import uploadConfig from '@config/upload';
+import storageConfig from '@config/storage';
 
 @Entity('users')
 class User {
@@ -32,7 +32,14 @@ class User {
   getAvatarUrl(): string | null {
     if (!this.avatar) return null;
 
-    return `${process.env.APP_API_URL}/files/${this.avatar}`;
+    switch (storageConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.avatar}`;
+      case 's3':
+        return `https://${storageConfig.config.aws.bucket}.s3.amazonaws.com/${this.avatar}`;
+      default:
+        return null;
+    }
   }
 
   @CreateDateColumn()

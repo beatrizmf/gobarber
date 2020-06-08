@@ -2,14 +2,14 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import multer from 'multer';
 
-import uploadConfig from '@config/upload';
+import storageConfig from '@config/storage';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 import UsersController from '@modules/users/infra/http/controllers/UsersController';
 import UserAvatarController from '@modules/users/infra/http/controllers/UserAvatarController';
 
-const upload = multer(uploadConfig);
+const storage = multer(storageConfig.multer);
 
 const usersRouter = Router();
 const usersController = new UsersController();
@@ -30,7 +30,7 @@ usersRouter.post(
 usersRouter.patch(
   '/avatar',
   ensureAuthenticated,
-  upload.single('avatar'),
+  storage.single('avatar'),
   userAvatarController.update,
 );
 
