@@ -10,19 +10,19 @@
 
 **Functional Requirements**
 
-- [ ] The user must be able to recover his password informing his email;
-- [ ] The user should receive an email with password recovery instructions;
-- [ ] The user must be able to reset his password.
+- [x] The user must be able to recover his password informing his email;
+- [x] The user should receive an email with password recovery instructions;
+- [x] The user must be able to reset his password.
 
 **Non-functional requirements**
 
-- [ ] Use Mailtrap to test in a dev environment;
+- [x] Use Ethereal to test in a dev environment;
 - [ ] Use Amazon SES for production shipments;
 - [ ] E-mails should be sent in the background (background job).
 
 **Business rules**
 
-- [ ] The link sent by email to reset password, must expire in 2h;
+- [x] The link sent by email to reset password, must expire in 2h;
 - [ ] The user needs to confirm the new password when resetting his password.
 
 ## Profile update
