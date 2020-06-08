@@ -45,7 +45,7 @@ class AuthenticateUserService {
       throw new AppError('incorrect email or password', 401);
     }
 
-    const { secret = "secret-for-tests", expiresIn } = authConfig.jwt;
+    const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
       subject: user.id,
