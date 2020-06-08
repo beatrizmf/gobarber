@@ -29,14 +29,12 @@
 
 **Functional Requirements**
 
-- [ ] The user must be able to update his name, email and password.
-
-**Non-functional requirements**
+- [x] The user must be able to update his name, email and password.
 
 **Business rules**
 
-- [ ] The user cannot change his email to an email already used;
-- [ ] To update your password, the user must inform the old password;
+- [x] The user cannot change his email to an email already used;
+- [x] To update your password, the user must inform the old password;
 - [ ] To update your password, the user needs to confirm the new password.
 
 ## Provider panel
