@@ -1,10 +1,10 @@
 import { uuid } from 'uuidv4';
-import IUserRepository from '@modules/users/infra/repositories/IUserRepository';
+import IUsersRepository from '@modules/users/infra/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 
-class FakeUsersRepository implements IUserRepository {
+class FakeUsersRepository implements IUsersRepository {
   private users: User[] = [];
 
   public async create({
