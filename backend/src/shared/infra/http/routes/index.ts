@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import notificationsRouter from '@modules/notifications/infra/http/routes/notifications.routes';
+
 import usersRouter from '@modules/users/infra/http/routes/users.routes';
 import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 import passwordRouter from '@modules/users/infra/http/routes/password.routes';
@@ -9,6 +11,8 @@ import appointmentsRouter from '@modules/appointments/infra/http/routes/appointm
 import providersRouter from '@modules/appointments/infra/http/routes/providers.routes';
 
 const routes = Router();
+
+routes.use('/notifications', notificationsRouter);
 
 routes.use('/users', usersRouter);
 routes.use('/sessions', sessionsRouter);
