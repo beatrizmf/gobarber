@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
 
 import AppError from '@shared/errors/AppError';
@@ -17,6 +18,9 @@ class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('NotificationsRepository')
+    private notificationsRepository: INotificationsRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
@@ -35,6 +39,11 @@ class CreateUserService {
       name,
       email,
       password: hashedPassword,
+    });
+
+    await this.notificationsRepository.create({
+      recipient_id: user.id,
+      content: 'You have registered with GoBarber! 🎉',
     });
 
     return user;
