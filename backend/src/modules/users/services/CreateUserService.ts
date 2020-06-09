@@ -19,9 +19,6 @@ class CreateUserService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('NotificationsRepository')
-    private notificationsRepository: INotificationsRepository,
-
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
@@ -39,11 +36,6 @@ class CreateUserService {
       name,
       email,
       password: hashedPassword,
-    });
-
-    await this.notificationsRepository.create({
-      recipient_id: user.id,
-      content: 'You have registered with GoBarber! 🎉',
     });
 
     return user;
