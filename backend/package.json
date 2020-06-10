@@ -41,7 +41,7 @@
     "@types/express": "^4.17.6",
     "@types/hapi__joi": "^17.1.2",
     "@types/ioredis": "^4.16.4",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.0",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mongodb": "^3.5.20",
     "@types/multer": "^1.4.3",
