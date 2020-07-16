@@ -17,7 +17,13 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks",
+    "prettier",
+    "eslint-plugin-import-helpers"
+  ],
   "rules": {
     "react/prop-types": "off",
     "no-unused-expressions": "off",
@@ -39,7 +45,7 @@
         "selector": "interface",
         "format": ["PascalCase"],
         "custom": {
-          "regex": "^I[A-Z]",
+          "regex": "^[A-Z]",
           "match": true
         }
       }
@@ -48,7 +54,7 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["module", ["parent", "sibling", "index"]],
+        "groups": [ "/^react$/","module", ["parent", "sibling", "index"]],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ],
