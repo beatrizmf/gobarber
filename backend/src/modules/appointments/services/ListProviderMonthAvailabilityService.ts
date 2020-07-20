@@ -1,9 +1,6 @@
 import { injectable, inject } from 'tsyringe';
-import { startOfHour, getDaysInMonth, getDate } from 'date-fns';
+import { getDaysInMonth, getDate, isAfter } from 'date-fns';
 
-import AppError from '@shared/errors/AppError';
-
-import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
@@ -32,7 +29,7 @@ class ListProviderMonthAvailabilityService {
     const appointments = await this.appointmentsRepository.findAllInMonthFromProvider(
       {
         provider_id,
-        month: month,
+        month,
         year,
       },
     );
@@ -51,9 +48,13 @@ class ListProviderMonthAvailabilityService {
         appointment => getDate(appointment.date) === day,
       );
 
+      const currentDate = new Date(Date.now());
+
+      const compareDate = new Date(year, month - 1, day);
+
       return {
         day,
-        available: appointmentsInDay.length < 10,
+        available: appointmentsInDay.length < 10 && isAfter(compareDate, currentDate),
       };
     });
 
