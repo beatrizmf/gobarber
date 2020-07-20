@@ -11,6 +11,9 @@ interface IRequest {
   date: Date;
 }
 
+// TODO - Verify is is past
+// TODO - Verify user exist
+
 @injectable()
 class CreateAppointmentService {
   constructor(
@@ -26,7 +29,7 @@ class CreateAppointmentService {
     );
 
     if (findAppointmentInSameDate) {
-      throw new AppError('Appointment alredy booked');
+      throw new AppError('Appointment already booked');
     }
 
     const appointment = await this.appointmentsRepository.create({
