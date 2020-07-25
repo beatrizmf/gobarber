@@ -15,9 +15,14 @@ describe('CreateAppointment', () => {
   it('should be able to create a new appointment', async () => {
     const provider_id = uuid();
 
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementation(() => new Date(2020, 4, 13, 8).getTime());
+
     const appointment = await createAppointment.execute({
-      date: new Date(2020, 5, 13, 11),
+      user_id: '1',
       provider_id,
+      date: new Date(2020, 5, 13, 11),
     });
 
     expect(appointment).toHaveProperty('id');
@@ -26,16 +31,38 @@ describe('CreateAppointment', () => {
 
   it('should not be able to create two appointments on the same time', async () => {
     const provider_id = uuid();
-    const date = new Date(2020, 5, 13, 11);
+    const appointmentDate = new Date(2020, 5, 13, 11);
+
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementation(() => new Date(2020, 4, 13, 8).getTime());
 
     await createAppointment.execute({
-      date,
+      user_id: '1',
       provider_id,
+      date: appointmentDate,
     });
 
     await expect(
       createAppointment.execute({
-        date,
+        user_id: '1',
+        date: appointmentDate,
+        provider_id,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to create two appointments on past', async () => {
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementation(() => new Date(2020, 4, 13, 10).getTime());
+
+    const provider_id = uuid();
+
+    await expect(
+      createAppointment.execute({
+        user_id: '1',
+        date: new Date(2020, 4, 13, 8),
         provider_id,
       }),
     ).rejects.toBeInstanceOf(AppError);
