@@ -4,7 +4,6 @@ import FakeNotificationsRepository from '@modules/notifications/repositories/fak
 import ListNotificationsService from './ListNotificationsService';
 import AppError from '@shared/errors/AppError';
 
-let fakeCacheProvider: FakeCacheProvider;
 let fakeUsersRepository: FakeUsersRepository;
 let fakeNotificationsRepository: FakeNotificationsRepository;
 let listNotificationsService: ListNotificationsService;
@@ -13,12 +12,10 @@ describe('ListNotificationsService', () => {
   beforeEach(() => {
     fakeNotificationsRepository = new FakeNotificationsRepository();
     fakeUsersRepository = new FakeUsersRepository();
-    fakeCacheProvider = new FakeCacheProvider();
 
     listNotificationsService = new ListNotificationsService(
       fakeUsersRepository,
       fakeNotificationsRepository,
-      fakeCacheProvider,
     );
   });
 
@@ -33,25 +30,6 @@ describe('ListNotificationsService', () => {
       content: 'This is a test notification',
       recipient_id: recipient.id,
     });
-
-    const notifications = await listNotificationsService.execute(recipient.id);
-
-    expect(notifications).toBeTruthy();
-  });
-
-  it('should be able to list cached notifications from a user', async () => {
-    const recipient = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@email.com',
-      password: '12345678',
-    });
-
-    await fakeNotificationsRepository.create({
-      content: 'This is a test notification',
-      recipient_id: recipient.id,
-    });
-
-    await listNotificationsService.execute(recipient.id);
 
     const notifications = await listNotificationsService.execute(recipient.id);
 

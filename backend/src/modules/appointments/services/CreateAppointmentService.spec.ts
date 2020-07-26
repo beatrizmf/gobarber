@@ -1,15 +1,22 @@
-import { uuid } from 'uuidv4';
 import AppError from '@shared/errors/AppError';
-import FakeAppointmentRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
+import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
 
-let fakeAppointmentRepository: FakeAppointmentRepository;
+let fakeNotificationRepository: FakeNotificationsRepository;
+let fakeAppointmentsRepository: FakeAppointmentsRepository;
+
 let createAppointment: CreateAppointmentService;
 
 describe('CreateAppointment', () => {
   beforeEach(() => {
-    fakeAppointmentRepository = new FakeAppointmentRepository();
-    createAppointment = new CreateAppointmentService(fakeAppointmentRepository);
+    fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    fakeNotificationRepository = new FakeNotificationsRepository();
+
+    createAppointment = new CreateAppointmentService(
+      fakeAppointmentsRepository,
+      fakeNotificationRepository,
+    );
   });
 
   it('should be able to create a new appointment', async () => {
