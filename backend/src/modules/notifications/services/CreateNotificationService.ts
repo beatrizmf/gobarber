@@ -20,9 +20,6 @@ class CreateNotificationService {
 
     @inject('NotificationsRepository')
     private notificationsRepository: INotificationsRepository,
-
-    @inject('CacheProvider')
-    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -39,8 +36,6 @@ class CreateNotificationService {
       recipient_id,
       content,
     });
-
-    await this.cacheProvider.invalidate(`notifications:${recipient.id}`);
 
     return notification;
   }

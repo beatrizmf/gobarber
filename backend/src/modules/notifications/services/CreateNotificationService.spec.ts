@@ -1,6 +1,5 @@
 import AppError from '@shared/errors/AppError';
 
-import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
 
@@ -8,19 +7,16 @@ import CreateNotificationService from './CreateNotificationService';
 
 let fakeNotificationsRepository: FakeNotificationsRepository;
 let fakeUsersRepository: FakeUsersRepository;
-let fakeCacheProvider: FakeCacheProvider;
 let createNotification: CreateNotificationService;
 
 describe('CreateNotification', () => {
   beforeEach(() => {
     fakeNotificationsRepository = new FakeNotificationsRepository();
     fakeUsersRepository = new FakeUsersRepository();
-    fakeCacheProvider = new FakeCacheProvider();
 
     createNotification = new CreateNotificationService(
       fakeUsersRepository,
       fakeNotificationsRepository,
-      fakeCacheProvider,
     );
   });
 
